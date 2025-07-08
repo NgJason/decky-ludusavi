@@ -77,6 +77,12 @@ class Ludusavi:
             ["config", "show"],
         )
 
+    async def normalize_game_name_async(self, game_name: str):
+        return await self._run_command(
+            ["find", "--normalized", game_name],
+            api_mode=False,
+        )
+
     async def _run_command(
         self, cmd: list[str], event: str | None = None, api_mode: bool = True
     ):

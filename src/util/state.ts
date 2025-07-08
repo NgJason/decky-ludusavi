@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getConfig, getLudusaviVersion, setConfig, setGameConfig } from "./backend";
+import { getConfig, getLudusaviVersion, setConfig, setGameConfig, normalizeGameName } from "./backend";
 import { toaster } from "@decky/api";
 
 export interface GameInfo {
@@ -91,7 +91,13 @@ class AppState {
       recent.splice(lastUsedIdx, 1);
     }
     else {
-      setGameConfig(gameName, { name: gameName, alias: gameName, autoSync: this.currentState.auto_backup_new_games });
+
+      let normalizedName = await normalizeGameName(gameName);
+      if(!normalizedName || normalizedName.toLowerCase().startsWith("no info for these games:")){
+        normalizedName = gameName;
+      }
+
+      setGameConfig(gameName, { name: gameName, alias: normalizedName, autoSync: this.currentState.auto_backup_new_games });
 
       if (appState.currentState.auto_backup_toast_enabled) {
         toaster.toast({ title: "Ludusavi", body: 'New game detected. Open Ludusavi to configure.' });
