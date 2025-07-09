@@ -40,7 +40,7 @@ class Plugin:
 
     async def normalize_game_name(self, game_name: str):
         decky.logger.debug("Executing: normalize_game_name('%s')", game_name)
-        return asyncio.create_task(self.ludusavi.normalize_game_name_async(game_name))
+        return await asyncio.create_task(self.ludusavi.normalize_game_name_async(game_name))
 
     async def restore_game(
         self, game_name: str, backup_id: str, preview: bool, api_mode: bool
