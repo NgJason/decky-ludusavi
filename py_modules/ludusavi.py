@@ -97,6 +97,7 @@ class Ludusavi:
         decky.logger.info("Running command: %s", subprocess.list2cmdline(cmd))
 
         try:
+            decky.logger.info("100")
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 env=self._env,
