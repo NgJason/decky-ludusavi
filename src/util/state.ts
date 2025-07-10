@@ -92,12 +92,14 @@ class AppState {
     }
     else {
 
-      let normalizedName = await normalizeGameName(gameName);
-      if(!normalizedName || normalizedName.toLowerCase().startsWith("no info for these games:")){
-        normalizedName = gameName;
-      }
+      // let normalizedName = await normalizeGameName(gameName);
+      // if(!normalizedName || normalizedName.toLowerCase().startsWith("no info for these games:")){
+      //   normalizedName = gameName;
+      // }
 
-      setGameConfig(gameName, { name: gameName, alias: normalizedName, autoSync: this.currentState.auto_backup_new_games });
+      setGameConfig(gameName, { name: gameName, 
+        alias: gameName//normalizedName
+        , autoSync: this.currentState.auto_backup_new_games });
 
       if (appState.currentState.auto_backup_toast_enabled) {
         toaster.toast({ title: "Ludusavi", body: 'New game detected. Open Ludusavi to configure.' });

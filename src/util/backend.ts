@@ -24,7 +24,7 @@ export const setGameConfig = (key: string, value: GameInfo) => call<[string, Gam
 export const getPluginLogs = () => call<[], string[]>("get_plugin_logs");
 
 
-const asyncHandler = <TResult>(func: () => Promise<void>, event: string) => {
+const asyncHandler = <TResult>(func: () => Promise<TResult>, event: string) => {
     return new Promise<TResult>((resolve, reject) => {
         const listener = (r: TResult) => {
             removeEventListener(event, listener);
