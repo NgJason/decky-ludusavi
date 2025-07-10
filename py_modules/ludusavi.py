@@ -103,18 +103,25 @@ class Ludusavi:
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.STDOUT,
             )
-            stdout, _ = await process.communicate()
 
+            decky.logger.info("107")
+            stdout, _ = await process.communicate()
+            decky.logger.info("109")
             result_str = stdout.decode()
+            decky.logger.info("111")
             decky.logger.info(result_str)
+            decky.logger.info("113")
 
             if api_mode:
+                decky.logger.info("116")
                 json_end = result_str.rindex("}") + 1
                 result_str = json.loads(result_str[:json_end])
 
             if event:
+                decky.logger.info("121")
                 await decky.emit(event, result_str)
 
+            decky.logger.info("124")
             return result_str
 
         except Exception as e:
