@@ -94,7 +94,7 @@ class Ludusavi:
         if api_mode:
             cmd.append("--api")
 
-        decky.logger.info("Running command: %s", subprocess.list2cmdline(cmd))
+        decky.logger.info("Running 1111 command: %s", subprocess.list2cmdline(cmd))
 
         try:
             decky.logger.info("100")
