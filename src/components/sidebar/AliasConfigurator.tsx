@@ -27,16 +27,14 @@ const NormalizeAlias = function(alias: string, onChange: Function){
       (async () => {
         console.log("Normalizing alias: 28");
 
-        localAlias+= "-26";
+        localAlias+= "-30";
 
-        onChange(localAlias);
+        //onChange(localAlias);
         return await normalizeGameName(alias);
       })().then((result) => {
         console.log("Normalizing alias: 37");
 
-        localAlias += "-39";
-        onChange(localAlias);
-
+        localAlias += "-37";        
         localAlias += "-"+ result.toString();
         onChange(localAlias);
       });
@@ -53,7 +51,7 @@ const ConfigureAliasesModal: FC<{ game: GameInfo; closeModal?: () => void; onOK:
       <PanelSection>
         <div>
           Sometimes the title of the game in Ludusavi will not match the one on Steam. For Example the game <b>TUNIC</b> on Steam will be called <b>Tunic</b> in
-          Ludusavi. Change the name below match settings in Ludusavi. Jason 342cmooooooon
+          Ludusavi. Change the name below match settings in Ludusavi. Jason 123321
         </div>
         <div>
           Configuring an alias for the game <b>{game.name}</b>.
