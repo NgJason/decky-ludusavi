@@ -92,13 +92,16 @@ class AppState {
     }
     else {
 
-      // let normalizedName = await normalizeGameName(gameName);
-      // if(!normalizedName || normalizedName.toLowerCase().startsWith("no info for these games:")){
-      //   normalizedName = gameName;
-      // }
+      let alias = await normalizeGameName(gameName);
+      if(!alias || alias.toLowerCase().startsWith("no info for these games:")){        
+        alias = gameName;
+        toaster.toast({ title: "Ludusavi", body: 'Unable to find game name in manifest.' });
+      }else{
+        toaster.toast({ title: "Ludusavi", body: 'Alias set as:'+ alias });
+      }
 
       setGameConfig(gameName, { name: gameName, 
-        alias: gameName//normalizedName
+        alias: gameName//alias
         , autoSync: this.currentState.auto_backup_new_games });
 
       if (appState.currentState.auto_backup_toast_enabled) {

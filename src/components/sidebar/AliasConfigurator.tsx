@@ -1,4 +1,5 @@
 import { ButtonItem, ConfirmModal, PanelSection, TextField, showModal } from "@decky/ui";
+import { toaster } from "@decky/api";
 import { FC, useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { GameInfo } from "../../util/state";
@@ -17,30 +18,16 @@ const AliasConfigurator: FC<{ alias: string; onChange: (alias: string) => void }
 };
 
 const NormalizeAlias = function(alias: string, onChange: Function){
-
-      console.log("Normalizing alias: 21");
-
-      let localAlias = alias;
-
-      localAlias += "-25";
-
       (async () => {
-        console.log("Normalizing alias: 28");
-
-        localAlias+= "-30";
-
-        //onChange(localAlias);
         return await normalizeGameName(alias);
       })().then((result) => {
-        console.log("Normalizing alias: 37");
-
-        localAlias += "-37";        
-        localAlias += "-"+ result.toString();
-        onChange(localAlias);
+        if(!result || result.toLowerCase().startsWith("no info for these games:")){
+          toaster.toast({ title: "Ludusavi", body: 'Unable to find game name in manifest.'});
+        }else{
+          toaster.toast({ title: "Ludusavi", body: 'Alias set as:'+ result });
+          onChange(result);
+        }
       });
-      // if(!result && !result.toLowerCase().startsWith("no info for these games:")){
-      //   onChange(result);
-      // }
 }
 
 const ConfigureAliasesModal: FC<{ game: GameInfo; closeModal?: () => void; onOK: (alias: string) => void; onMiddleButton: (alias: string) => void }> = ({ game, closeModal, onOK, onMiddleButton }) => {
